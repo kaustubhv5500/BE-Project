@@ -8,9 +8,14 @@ freqz(fb)
 Fs = 1e3;
 t = 0:1/Fs:1-1/Fs;
 x = cos(2*pi*64*t).*(t>=0.1 & t<0.3)+sin(2*pi*16*t).*(t>=0.5 & t<0.9);
-plot(t,x)
+y = sawtooth(2*pi*12*t).*(t>= 0.5);
+figure;
+plot(t,x,t,y);
 title('Signal');
-fb = cwtfilterbank('SignalLength',numel(t),'SamplingFrequency',Fs);
+legend('x','y');
+figure;
+
+fb = cwtfilterbank('SignalLength',numel(t),'SamplingFrequency',Fs,'FrequencyLimits',[1 500]);
 freqz(fb)
 title('Frequency Responses — Morse (3,60) Wavelet')
 fb3x5 = cwtfilterbank('SignalLength',numel(t),'SamplingFrequency',Fs,'TimeBandwidth',5);
