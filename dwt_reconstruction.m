@@ -104,5 +104,19 @@ x = [x, zeros(1,2^10 - length(x))];
 y = [y,zeros(1,2^10 - length(y))];
 signal = reshape(x,length(x),1) + reshape(y,length(y),1);
 Tx = dyadicSynthesis(signal);
-plot(Tx)
+figure;
+plot(Tx);
+title('Transmitted Signal');
+grid on;
+
+Rx_ = dyadicAnalysis(Tx);
+error = Rx_ - signal;
+figure;
+plot(signal);
+hold on;
+plot(Rx_);
+grid on;
+hold off;
+title('Plot of Original and Reconstructed Signals');
+legend('Original','Reconstructed');
 
