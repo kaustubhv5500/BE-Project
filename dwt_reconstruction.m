@@ -100,6 +100,41 @@ dyadicSynthesis = dsp.DyadicSynthesisFilterBank( ...
     'CustomHighpassFilter',[0 hir], ...
     'NumLevels', 4 );
 
+scope1 = dsp.TimeScope(2, ...
+  'Name', 'Original Signal', ...
+  'SampleRate', fs, ...
+  'TimeSpan', 20, ...
+  'YLimits', [-2 2], ...
+  'ShowLegend', true, ...
+  'TimeSpanOverrunAction', 'Scroll');
+
+scope2 = dsp.TimeScope(2, ...
+  'Name', 'Reconstructed Signal', ...
+  'SampleRate', fs, ...
+  'TimeSpan', 20, ...
+  'YLimits', [-2 2], ...
+  'ShowLegend', true, ...
+  'TimeSpanOverrunAction', 'Scroll');
+
+t = 0.1:0.1:25.6;
+x = sin(t + pi);
+y = square(t);
+
+Num = 15;
+for i=1:Num
+    Tx = [x y];
+    Tx = reshape(Tx,length(Tx),1);
+    Tx_dwt = dyadicSynthesis(Tx);
+    Rx = dyadicAnalysis(Tx_dwt);
+    scope1(Tx(1:256),Tx(256:512));
+    scope2(Rx(1:256),Rx(256:512));
+end
+
+release(dyadicAnalysis);
+release(dyadicSynthesis);
+release(scope1);
+release(scope2);
+
 x = [x, zeros(1,2^10 - length(x))];
 y = [y,zeros(1,2^10 - length(y))];
 signal = reshape(x,length(x),1) + reshape(y,length(y),1);
@@ -119,4 +154,3 @@ grid on;
 hold off;
 title('Plot of Original and Reconstructed Signals');
 legend('Original','Reconstructed');
-
