@@ -7,7 +7,7 @@
 
 clc;
 clear;
-close;
+close all;
 
 % Using DWT Filter bank to perform dwt and perform reconstruction
 fb = dwtfilterbank('Wavelet','sym6');
@@ -88,8 +88,9 @@ title('Plot of Reconstructed X after Summing and Filtering');
 % TODO: Create novel algorithm to design a custom highpass and lowpass filters to
 % ensure perfect reconstruction at the gievn frequency range for satellite
 % communications
+% Frequency specifications for audio signals: 3.4-4 kHz
 
-load dspwlets;    % load filter coefficients and input signal
+load dspwlets;    % load filter coefficients and time and frequency parameters
 dyadicAnalysis = dsp.DyadicAnalysisFilterBank( ...
     'CustomLowpassFilter', lod, ...
     'CustomHighpassFilter', hid, ...
@@ -113,6 +114,14 @@ scope2 = dsp.TimeScope(2, ...
   'SampleRate', fs, ...
   'TimeSpan', 20, ...
   'YLimits', [-2 2], ...
+  'ShowLegend', true, ...
+  'TimeSpanOverrunAction', 'Scroll');
+
+scope3 = dsp.TimeScope(2, ...
+  'Name', 'Error in Reconstructed and Original Signal', ...
+  'SampleRate', fs, ...
+  'TimeSpan', 20, ...
+  'YLimits', [-0.05 0.05], ...
   'ShowLegend', true, ...
   'TimeSpanOverrunAction', 'Scroll');
 
@@ -142,6 +151,7 @@ release(dyadicSynthesis);
 t = 0.1:0.1:25.6;
 x = sin(t + pi);
 y = square(t);
+error_rate = 0;
 
 Num = 15;
 for i=1:Num
@@ -151,11 +161,19 @@ for i=1:Num
     Rx = dyadicAnalysis(Tx_dwt);
     scope1(Tx(1:256),Tx(256:512));
     scope2(Rx(1:256),Rx(256:512));
+    error1 = (Rx(1:256) - Tx(1:256))/length(Rx(1:256));
+    error2 = (Rx(256:512) - Tx(256:512))/length(Rx(256:512));
+    scope3(error1,error2);
+    error_rate = error_rate + (abs(mean(error1)/mean(Tx(1:256))) + abs(mean(error2)/mean(Tx(256:512))))/2;
 end
 
+error_rate = error_rate/Num;
+fprintf('Mean Error Rate of the system: %f\n',error_rate/Num);
 release(dyadicAnalysis);
 release(dyadicSynthesis);
 release(scope1);
 release(scope2);
+release(scope3);
+close all;
 
 
