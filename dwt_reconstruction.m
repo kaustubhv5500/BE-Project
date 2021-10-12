@@ -174,6 +174,6 @@ release(dyadicSynthesis);
 release(scope1);
 release(scope2);
 release(scope3);
-close all;
+% close all;
 
 
