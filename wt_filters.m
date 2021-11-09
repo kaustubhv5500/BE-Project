@@ -34,12 +34,59 @@ hif = hir./(sqrt(sum(hir))*1e7);
 % Plotting the frequency and phase response plots of the filters
 freqz(lod,1,fs);
 figure;
+[h,t] = impz(lod,1);
+plot(t,h);
+title('Impluse Response');
+xlabel('Time')
+ylabel('Magnitude');
+grid on;
+figure;
+
 freqz([0 lor],1,fs);
 figure;
+[h,t] = impz([0 lor],1);
+plot(t,h);
+title('Impluse Response');
+xlabel('Time')
+ylabel('Magnitude');
+grid on;
+figure;
+
 freqz(hid,1,fs);
 figure;
+[h,t] = impz(hid,1);
+plot(t,h);
+title('Impluse Response');
+xlabel('Time')
+ylabel('Magnitude');
+grid on;
+figure;
+
 freqz([0 hir],1,fs);
 figure;
+[h,t] = impz([0 hir],1);
+plot(t,h);
+title('Impluse Response');
+xlabel('Time')
+ylabel('Magnitude');
+grid on;
+figure;
+
 freqz(lof,1,fs);
 figure;
+[h,t] = impz(lof,1);
+plot(t,h);
+title('Impluse Response');
+xlabel('Time')
+ylabel('Magnitude');
+grid on;
+figure;
+
 freqz(hif,1,fs);
+figure;
+[h,t] = impz(hif,1);
+plot(t,h);
+title('Impluse Response');
+xlabel('Time')
+ylabel('Magnitude');
+grid on;

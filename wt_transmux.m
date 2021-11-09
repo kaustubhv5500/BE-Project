@@ -38,12 +38,12 @@ load dspwlets;
 dyadicAnalysis = dsp.DyadicAnalysisFilterBank( ...
     'CustomLowpassFilter', lod, ...
     'CustomHighpassFilter', hid, ...
-    'NumLevels', 4, 'Filter', 'Biorthogonal');
+    'NumLevels', 4, 'Filter', 'Haar');
 
 dyadicSynthesis = dsp.DyadicSynthesisFilterBank( ...
     'CustomLowpassFilter',[0 lor], ...
     'CustomHighpassFilter',[0 hir], ...
-    'NumLevels', 4,'Filter', 'Biorthogonal');
+    'NumLevels', 4,'Filter', 'Haar');
 
 scope1 = dsp.TimeScope(3, ...
   'Name', 'Original Signal', ...
@@ -116,9 +116,9 @@ for i=1:Num
     Tx = [x y z];
     Tx = reshape(Tx,length(Tx),1);
     Tx_dwt = dyadicSynthesis(Tx);
-    Tx_dwt_noise = ricChan(Tx_dwt);
+    % Tx_dwt_noise = rayChan(Tx_dwt);
     % Tx_dwt_noise = awgn(Tx_dwt,-20);
-    Rx = dyadicAnalysis(Tx_dwt_noise);
+    Rx = dyadicAnalysis(Tx_dwt);
     scope1(Tx(1:256),Tx(256:512),Tx(512:768));
     scope2(Rx(1:256),Rx(256:512),Rx(512:768));
     delayed_sig1 = delay1(Tx(1:256));
