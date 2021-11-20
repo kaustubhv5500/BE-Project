@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fixed-Point Report for mlhdlc_dwt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2021-11-20 19:27:46</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>conv<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [y] = conv(x,h)
+%CONV Redifinition of discrete convolution function to work with HDL Coder
+%   Input: Array of elements to be convolved
+%   Output: Discrete convolution of input elements
+n = length(h) + length(x) - 1;
+y = zeros(1,n);
+
+for i=1:n
+    sum = 0;
+</pre></TD>
+</TR>
+<TR>
+<TD class="cov black" style="background-color: rgb(255,160,118);">Once</TD>
+<TD class="padd"><pre>    for j=1:i
+</pre></TD>
+</TR>
+<TR>
+<TD class="cov black" style="background-color: rgb(53227,30194,50917);">-23040%</TD>
+<TD class="padd"><pre>        if (((i- j+ 1) &lt;= length(h) ) &amp;&amp;(j &lt;= length(x) ))
+            sum = sum + x(j)* h(i- j+ 1);
+        end</pre></TD>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>
+    end
+    y(i) = sum;
+end
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 14)</th></TR><TR class="a">
+<TD class="left">h</TD><TD class="left">double 1 x 8 </TD><TD class="right">-0.630880767929591</TD><TD class="right">0.714846570552542</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 13)</TD></TR>
+<TR class="b">
+<TD class="left">i</TD><TD class="left">double</TD><TD class="right">1</TD><TD class="right">22</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 5, 0)</TD></TR>
+<TR class="a">
+<TD class="left">j</TD><TD class="left">double</TD><TD class="right">1</TD><TD class="right">22</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 5, 0)</TD></TR>
+<TR class="b">
+<TD class="left">n</TD><TD class="left">double</TD><TD class="right">22</TD><TD class="right">22</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 5, 0)</TD></TR>
+<TR class="a">
+<TD class="left">sum</TD><TD class="left">double</TD><TD class="right">-1.8442507246448256</TD><TD class="right">1.8442507246448256</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="b">
+<TD class="left">x</TD><TD class="left">double 1 x 15 </TD><TD class="right">-1</TD><TD class="right">1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="a">
+<TD class="left">y</TD><TD class="left">double 1 x 22 </TD><TD class="right">-1.8442507246448256</TD><TD class="right">1.8442507246448256</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>dwt<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function g = dwt(f,h)
+%  function g = dwt(f,h,NJ); Calculates the DWT of periodic  f
+%  with scaling filter  h
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This script/function was created by 
+% Abdullah Al Muhit
+% contact - almuhit@gmail.com
+% website - https://sites.google.com/site/almuhit/
+% Please use it at your own risk. Also, Please cite the following paper:
+% A A Muhit, M S Islam, and M Othman, “VLSI Implementation of Discrete Wavelet Transform (DWT) for Image Compression”, in Proc. of The Second International Conference on Autonomous Robots and Agents, Palmerston North, New Zealand, pp. 391-395, 2004, ISBN 0-476-00994-4. [PDF]
+% A A Muhit, M S Islam, and M Othman, “ Design Design and Analysis of Discrete Wavelet Transform (DWT) for Image Compression Using VHDL”, in Proc. of the International Conference on Parallel and Distributed Processing Techniques and Applications, PDPTA 2005, Volume 1. CSREA Press 2005, pp. 157-160, Las Vegas, Nevada, USA, 2005, ISBN 1-932415-58-0. [PDF]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+N = length(h);  L = length(f);
+c = f;
+h0  = fliplr(h);                          % Scaling filter
+h1 = h;  h1(1:2:N) = -h1(1:2:N);          % Wavelet filter
+
+L = length(c);
+c = [c(mod((-(N-1):-1),L)+1) c];          % Make periodic
+
+%subplot(3,1,1);plot(f);
+%subplot(3,1,2);plot(c);
+
+d = conv(c,h1);   d = d(N:2:(N+L-2));     % Convolve &amp; d-sample
+c = conv(c,h0);   c = c(N:2:(N+L-2));     % Convolve &amp; d-sample
+
+g = [c,d];                                % The DWT
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 14)</th></TR><TR class="a">
+<TD class="left">L</TD><TD class="left">double</TD><TD class="right">8</TD><TD class="right">8</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 4, 0)</TD></TR>
+<TR class="b">
+<TD class="left">N</TD><TD class="left">double</TD><TD class="right">8</TD><TD class="right">8</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 4, 0)</TD></TR>
+<TR class="a">
+<TD class="left">c > 1</TD><TD class="left">double 1 x 8 </TD><TD class="right">-1</TD><TD class="right">1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="b">
+<TD class="left">c > 2</TD><TD class="left">double 1 x 15 </TD><TD class="right">-1</TD><TD class="right">1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="a">
+<TD class="left">c > 3</TD><TD class="left">double 1 x 22 </TD><TD class="right">-1.4296931411050842</TD><TD class="right">1.3177290746931496</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="b">
+<TD class="left">c > 4</TD><TD class="left">double 1 x 4 </TD><TD class="right">-0.9477427109173796</TD><TD class="right">1.2617615358591816</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="a">
+<TD class="left">d > 1</TD><TD class="left">double 1 x 22 </TD><TD class="right">-1.8442507246448256</TD><TD class="right">1.8442507246448256</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="b">
+<TD class="left">d > 2</TD><TD class="left">double 1 x 4 </TD><TD class="right">-1.8442507246448256</TD><TD class="right">1.8442507246448256</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="a">
+<TD class="left">f</TD><TD class="left">double 1 x 8 </TD><TD class="right">-1</TD><TD class="right">1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="b">
+<TD class="left">g</TD><TD class="left">double 1 x 8 </TD><TD class="right">-1.8442507246448256</TD><TD class="right">1.8442507246448256</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="a">
+<TD class="left">h</TD><TD class="left">double 1 x 8 </TD><TD class="right">-0.630880767929591</TD><TD class="right">0.714846570552542</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 13)</TD></TR>
+<TR class="b">
+<TD class="left">h0</TD><TD class="left">double 1 x 8 </TD><TD class="right">-0.630880767929591</TD><TD class="right">0.714846570552542</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 13)</TD></TR>
+<TR class="a">
+<TD class="left">h1</TD><TD class="left">double 1 x 8 </TD><TD class="right">-0.630880767929591</TD><TD class="right">0.714846570552542</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 13)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>fliplr<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [y] = fliplr(x)
+%FLIPLR Redefinition of MATLAB  fliplr function
+%   Reverses the input array
+N = length(x);
+y = zeros(1,N);
+for i=1:N
+    y(N-i+1) = x(i);
+end
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 14)</th></TR><TR class="a">
+<TD class="left">N</TD><TD class="left">double</TD><TD class="right">8</TD><TD class="right">8</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 4, 0)</TD></TR>
+<TR class="b">
+<TD class="left">i</TD><TD class="left">double</TD><TD class="right">1</TD><TD class="right">8</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(0, 4, 0)</TD></TR>
+<TR class="a">
+<TD class="left">x</TD><TD class="left">double 1 x 8 </TD><TD class="right">-0.630880767929591</TD><TD class="right">0.714846570552542</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 13)</TD></TR>
+<TR class="b">
+<TD class="left">y</TD><TD class="left">double 1 x 8 </TD><TD class="right">-0.630880767929591</TD><TD class="right">0.714846570552542</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 13)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>mlhdlc_dwt<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [y_out] = mlhdlc_dwt(x_in)
+
+hid = [-0.230377813308855 0.714846570552542 -0.630880767929591 -0.0279837694169839 0.187034811718881 0.0308413818359870 -0.0328830116669830 -0.0105974017849973];
+
+% declare and initialize the delay registers
+% persistent ud1 ud2 ud3 ud4 ud5 ud6 ud7 ud8;
+% if isempty(ud1)
+%     ud1 = 0; ud2 = 0; ud3 = 0; ud4 = 0; ud5 = 0; ud6 = 0; ud7 = 0; ud8 = 0;
+% end
+
+% access the previous value of states/registers
+% a1 = ud1;
+% a2 = ud2;
+% a3 = ud3;
+% a4 = ud4;
+% a5 = ud5;
+% a6 = ud6;
+% a7 = ud7;
+% a8 = ud8;
+
+% x = [a1 a2 a3 a4 a5 a6 a7 a8];
+
+% DWT of the output
+y_out = dwt(x_in,hid);
+
+% delayout input signal
+% x_out = idwt(y_out,hid);
+
+% update the delay line
+% ud8 = ud7; 
+% ud7 = ud6;
+% ud6 = ud5;
+% ud5 = ud4;
+% ud4 = ud3;
+% ud3 = ud2;
+% ud2 = ud1;
+% ud1 = x_in;
+
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 14)</th></TR><TR class="a">
+<TD class="left">hid</TD><TD class="left">double 1 x 8 </TD><TD class="right">-0.630880767929591</TD><TD class="right">0.714846570552542</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 13)</TD></TR>
+<TR class="b">
+<TD class="left">x_in</TD><TD class="left">double 1 x 8 </TD><TD class="right">-1</TD><TD class="right">1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+<TR class="a">
+<TD class="left">y_out</TD><TD class="left">double 1 x 8 </TD><TD class="right">-1.8442507246448256</TD><TD class="right">1.8442507246448256</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 14, 12)</TD></TR>
+</TABLE>
+
+</body>
+</html>
