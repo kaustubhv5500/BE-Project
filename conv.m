@@ -3,7 +3,7 @@ function [y] = conv(x,h)
 %   Input: Array of elements to be convolved
 %   Output: Discrete convolution of input elements
 n = length(h) + length(x) - 1;
-y(1,n) = 0;
+y = zeros(1,n);
 
 for i=1:n
     sum = 0;
