@@ -17,6 +17,9 @@ h0 = h;                                    % Scaling filter
 h1 = fliplr(h);  h1(2:2:N) = -h1(2:2:N);   % Wavelet filter
 LJ = L/2;                                  % Number of SF coeffs.
 
+cu = zeros(1,L+N);
+du = zeros(1,L+N);
+
 c  = g(1:LJ);                              % Scaling coeffs.
 w  = mod(0:N/2-1,LJ)+1;                    % Make periodic
 d  = g(LJ+1:L);                            % Wavelet coeffs.
