@@ -23,7 +23,7 @@ x_out = zeros(1,8);
 for ii=1:n
     data = Tx(ii*N-N+1:ii*N);
     % call to the design 'mlhdlc_dwt' that is targeted for hardware
-    [temp_y] = mlhdlc_dwt(data);
+    temp_y = mlhdlc_dwt(data);
     y_out = [y_out temp_y];
     % [y_out(ii),x_out(ii)] = mlhdlc_dwt(data);
 end

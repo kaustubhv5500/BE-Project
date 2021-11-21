@@ -15,10 +15,10 @@
     <param.hdl.BuildDirectory>option.hdl.ProjectDirectory</param.hdl.BuildDirectory>
     <param.hdl.BuildSpecifiedDirectory />
     <param.fixptconv.InstrumentedMexFile>${PROJECT_ROOT}\codegen\mlhdlc_dwt\fixpt\mlhdlc_dwt_float_mex.mexw64</param.fixptconv.InstrumentedMexFile>
-    <param.fixptconv.InstrumentedBuildChecksum>721190816</param.fixptconv.InstrumentedBuildChecksum>
+    <param.fixptconv.InstrumentedBuildChecksum>2937017037</param.fixptconv.InstrumentedBuildChecksum>
     <param.fixptconv.ShowCoverage>true</param.fixptconv.ShowCoverage>
-    <param.fixptconv.FixedPointValidationChecksum>868366925</param.fixptconv.FixedPointValidationChecksum>
-    <param.fixptconv.FixedPointSourceCodeChecksum>4201448117</param.fixptconv.FixedPointSourceCodeChecksum>
+    <param.fixptconv.FixedPointValidationChecksum>2329467226</param.fixptconv.FixedPointValidationChecksum>
+    <param.fixptconv.FixedPointSourceCodeChecksum>3576006145</param.fixptconv.FixedPointSourceCodeChecksum>
     <param.fixptconv.FixedPointStaticAnalysisChecksum />
     <param.fixptconv.DefaultTestFile>${PROJECT_ROOT}\mlhdlc_dwt_tb.m</param.fixptconv.DefaultTestFile>
     <param.fixptconv.ExcludedFixedPointVerificationFiles />
@@ -650,8 +650,8 @@
     <var.lastVerifyContext>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;SimulationContext&gt;&lt;testFiles&gt;&lt;file&gt;D:\Downloads\Research\be\code\mlhdlc_dwt_tb.m&lt;/file&gt;&lt;/testFiles&gt;&lt;syntheticCode&gt;&lt;/syntheticCode&gt;&lt;synthetic&gt;false&lt;/synthetic&gt;&lt;/SimulationContext&gt;</var.lastVerifyContext>
     <param.fpDataRoot>D:\Downloads\Research\be\code\codegen\mlhdlc_dwt\fixpt/guiFpReport.mat</param.fpDataRoot>
     <param.fpUserFileChecksum />
-    <var.snapshotChecksum>3974386691</var.snapshotChecksum>
-    <param.fpLastConvertChecksum>721190816</param.fpLastConvertChecksum>
+    <var.snapshotChecksum>2164544869</var.snapshotChecksum>
+    <param.fpLastConvertChecksum>2937017037</param.fpLastConvertChecksum>
     <var.FixedPointAnalysisMode>option.FixedPointAnalysisMode.Sim</var.FixedPointAnalysisMode>
     <param.FixedPointUseDesignRanges>false</param.FixedPointUseDesignRanges>
     <param.hdl.Workflow>option.workflow.GenericAsicFpga</param.hdl.Workflow>
@@ -1058,7 +1058,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\mlhdlc_dwt.m">
-        <Inputs fileName="mlhdlc_dwt.m" functionName="mlhdlc_dwt" nargout="2">
+        <Inputs fileName="mlhdlc_dwt.m" functionName="mlhdlc_dwt" nargout="1">
           <Input Name="x_in">
             <Class>double</Class>
             <Size>1 x 8</Size>
