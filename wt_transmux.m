@@ -38,12 +38,12 @@ load dspwlets;
 dyadicAnalysis = dsp.DyadicAnalysisFilterBank( ...
     'CustomLowpassFilter', lod, ...
     'CustomHighpassFilter', hid, ...
-    'NumLevels', 4, 'Filter', 'Haar');
+    'NumLevels', 4);
 
 dyadicSynthesis = dsp.DyadicSynthesisFilterBank( ...
     'CustomLowpassFilter',[0 lor], ...
     'CustomHighpassFilter',[0 hir], ...
-    'NumLevels', 4,'Filter', 'Haar');
+    'NumLevels', 4);
 
 scope1 = dsp.TimeScope(3, ...
   'Name', 'Original Signal', ...
@@ -75,7 +75,7 @@ sampleRate500kHz = 500e3; % Sample rate of 500K Hz
 sampleRate20kHz  = 20e3; % Sample rate of 20K Hz
 maxDopplerShift  = 200; % Maximum Doppler shift of diffuse components (Hz)
 delayVector = (0:5:15)*1e-6; % Discrete delays of four-path channel (s)
-gainVector  = [-20 -20 -20 -20]; % Average path gains (dB)
+gainVector  = [-100 -100 -100 -100]; % Average path gains (dB)
 
 % Configure a Rayleigh channel object
 rayChan = comm.RayleighChannel( ...
@@ -104,11 +104,17 @@ delay2 = dsp.Delay(6);
 delay3 = dsp.Delay(6);
 
 t = 0.1:0.1:25.6;
-x = sin(t + pi);
-y = square(t);
-z = sawtooth(1.3*t + 1.5*pi);
-error_rate = 0;
+x = sin(1.3*t + pi);
+% [x,fs] = audioread("OSR_us_000_0037_8k.wav");
+x = reshape(x(1:256),1,256);
 
+y = square(t);
+
+z = sawtooth(1.3*t + 1.5*pi);
+% [z, fs] = audioread("OSR_us_000_0012_8k.wav");
+z = reshape(z(1:256),1,256);
+
+error_rate = 0;
 Num = 15;
 nsignals = 3;
 
@@ -116,8 +122,8 @@ for i=1:Num
     Tx = [x y z];
     Tx = reshape(Tx,length(Tx),1);
     Tx_dwt = dyadicSynthesis(Tx);
-    % Tx_dwt_noise = rayChan(Tx_dwt);
-    % Tx_dwt_noise = awgn(Tx_dwt,-20);
+%     Tx_dwt_noise = rayChan(Tx_dwt);
+%     Tx_dwt_noise = awgn(Tx_dwt,50);
     Rx = dyadicAnalysis(Tx_dwt);
     scope1(Tx(1:256),Tx(256:512),Tx(512:768));
     scope2(Rx(1:256),Rx(256:512),Rx(512:768));
@@ -131,8 +137,8 @@ for i=1:Num
     error_rate = error_rate + (abs(mean(error1)/mean(Tx(1:256))) + abs(mean(error2)/mean(Tx(256:512))) + abs(mean(error3)/mean(Tx(512:768))))/nsignals;
 end
 
-error_rate = error_rate/length(error1);
-fprintf('Mean Error Rate of the system: %f\n',error_rate);
+error_rate = error_rate^2/length(error1);
+% fprintf('Mean Error Rate of the system: %f\n',error_rate);
 release(dyadicAnalysis);
 release(dyadicSynthesis);
 release(scope1);
