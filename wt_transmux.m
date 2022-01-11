@@ -5,7 +5,7 @@
 % Department of Electronics and Telecommunication Engineering 
 % Sardar Patel institute of Technology, Mumbai
 % MATLAB Version: R2018a
-% Developed in: August - November 2021
+% Developed in: August - December 2021
 
 % Using Dyadic analysis and synthesis filter banks objects for
 % reconstruction based on given example coefficients
@@ -69,6 +69,14 @@ scope3 = dsp.TimeScope(3, ...
   'ShowLegend', true, ...
   'TimeSpanOverrunAction', 'Scroll');
 
+scope4 = dsp.TimeScope(1, ...
+  'Name', 'Transmitted Signal', ...
+  'SampleRate', fs, ...
+  'TimeSpan', 5, ...
+  'YLimits', [-2 2], ...
+  'ShowLegend', true, ...
+  'TimeSpanOverrunAction', 'Scroll');
+
 KFactor = 10; % Linear ratio of specular power to diffuse power
 specDopplerShift = 100; % Doppler shift of specular component (Hz)
 sampleRate500kHz = 500e3; % Sample rate of 500K Hz
@@ -127,6 +135,7 @@ for i=1:Num
     Rx = dyadicAnalysis(Tx_dwt);
     scope1(Tx(1:256),Tx(256:512),Tx(512:768));
     scope2(Rx(1:256),Rx(256:512),Rx(512:768));
+    scope4(Tx_dwt);
     delayed_sig1 = delay1(Tx(1:256));
     delayed_sig2 = delay2(Tx(256:512));
     delayed_sig3 = delay3(Tx(512:768));
@@ -144,3 +153,4 @@ release(dyadicSynthesis);
 release(scope1);
 release(scope2);
 release(scope3);
+release(scope4);
