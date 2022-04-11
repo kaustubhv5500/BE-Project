@@ -105,10 +105,6 @@ xlabel('Time')
 ylabel('Magnitude');
 grid on;
 
-snr = [-70 -50 -20 -5 10 30 50];
-rates = [1.02006 0.542634 0.009215 0.000165 0.000089 0.000012 1.7e-6];
-conventional_rates = [1.7982 0.728 0.0129 0.00207 0.00187 0.000081  7.1590e-5];
-
 lof = reshape([rand(1,1) lof],3,3);
 hif = reshape([rand(1,1) hif],3,3);
 % co_fact_0 = lof*hif;
@@ -129,15 +125,6 @@ co_fact_2(3,3) = 0;
 
 lof(3,3)=0;hif(1,1)=0;lod(3,3)=0;lor(1,1)=0;hit(1,1)=0;lot(3,3)=0;
 matrix_co_fact = transpose(inv(co_fact)*det(co_fact));
-
-figure;
-semilogy(snr,rates,'-*',snr,conventional_rates,'-^','LineWidth',2);
-grid on;
-xlabel('SNR (dB)');
-ylabel('Mean Error Rate');
-title('SNR vs Mean Error Rate for AWGN');
-legend('Proposed system','Conventional system');
-set(gca,'FontSize',15,'xlim',[-70 50]);
 
 close all;
 

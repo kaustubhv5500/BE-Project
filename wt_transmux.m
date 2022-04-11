@@ -72,7 +72,7 @@ scope3 = dsp.TimeScope(3, ...
 scope4 = dsp.TimeScope(1, ...
   'Name', 'Transmitted Signal', ...
   'SampleRate', fs, ...
-  'TimeSpan', 5, ...
+  'TimeSpan', 20, ...
   'YLimits', [-2 2], ...
   'ShowLegend', true, ...
   'TimeSpanOverrunAction', 'Scroll');
@@ -120,10 +120,10 @@ y = square(t);
 
 z = sawtooth(1.3*t + 1.5*pi);
 % [z, fs] = audioread("OSR_us_000_0012_8k.wav");
-z = reshape(z(1:256),1,256);
+% z = reshape(z(1:256),1,256);
 
 error_rate = 0;
-Num = 15;
+Num = 50;
 nsignals = 3;
 
 for i=1:Num
@@ -131,7 +131,7 @@ for i=1:Num
     Tx = reshape(Tx,length(Tx),1);
     Tx_dwt = dyadicSynthesis(Tx);
 %     Tx_dwt_noise = rayChan(Tx_dwt);
-%     Tx_dwt_noise = awgn(Tx_dwt,50);
+    Tx_dwt_noise = awgn(Tx_dwt,30);
     Rx = dyadicAnalysis(Tx_dwt);
     scope1(Tx(1:256),Tx(256:512),Tx(512:768));
     scope2(Rx(1:256),Rx(256:512),Rx(512:768));
