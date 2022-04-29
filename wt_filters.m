@@ -126,7 +126,7 @@ co_fact_2(3,3) = 0;
 lof(3,3)=0;hif(1,1)=0;lod(3,3)=0;lor(1,1)=0;hit(1,1)=0;lot(3,3)=0;
 matrix_co_fact = transpose(inv(co_fact)*det(co_fact));
 
-close all;
+% close all;
 
 disp('Filter Co-factor matrices:');
 disp(lof);

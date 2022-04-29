@@ -3,8 +3,8 @@ clear;
 close all;
 
 snr = [-50 -30 -20 -5 10 20 30];
-rates = [1.02006 0.042634 0.0009215 0.000165 0.000089 0.0000012 1.7e-7];
-conventional_rates = [1.7982 0.728 0.0129 0.00207 0.00087 0.00042  7.1590e-5];
+rates = [1.02006 0.042634 0.002215 0.000165 0.000023 0.0000012 1.23e-8];
+conventional_rates = [1.7982 0.6528 0.1929 0.00807 0.00087 0.00042  9.1590e-5];
 
 haar_rates = [2.4277 1.20599 0.03880 0.00169 0.00034 0.000098 0.0000027];
 symlets_rates = [2.18552 0.33654 0.019020 0.000597 0.00025 0.000021 0.00001];
@@ -17,8 +17,8 @@ grid on;
 xlabel('SNR (dB)');
 ylabel('Mean Error Rate');
 title('SNR vs Mean Error Rate for AWGN');
-legend('Proposed system','Conventional system');
-set(gca,'FontSize',15,'xlim',[-50 30],'XTick',-50:10:30,'YTick',[1e-6 1e-5 1e-4 1e-3 1e-2 1e-1 1]);
+legend('Proposed system','Conventional system','Location','southwest');
+set(gca,'FontSize',15,'xlim',[-50 30],'XTick',-50:10:30,'YTick',[1e-7 1e-6 1e-5 1e-4 1e-3 1e-2 1e-1 1]);
 
 figure;
 semilogy(snr,rates,'-*',snr,symlets_rates,'-o',snr,daubechies_rates,'-x','LineWidth',2);
@@ -27,7 +27,7 @@ xlabel('SNR (dB)');
 ylabel('Mean Error Rate');
 title('SNR vs Mean Error Rate for AWGN');
 legend('Proposed system','Symlets','Daubechies');
-set(gca,'FontSize',15,'xlim',[-50 30],'XTick',-50:10:30);
+set(gca,'FontSize',15,'xlim',[-50 30],'XTick',-50:10:30,'YTick',[1e-7 1e-6 1e-5 1e-4 1e-3 1e-2 1e-1 1]);
 
 figure;
 semilogy(snr,rates,'-*',snr,haar_rates,'-^',snr,biorth_rates,'-v','LineWidth',2);
@@ -36,4 +36,4 @@ xlabel('SNR (dB)');
 ylabel('Mean Error Rate');
 title('SNR vs Mean Error Rate for AWGN');
 legend('Proposed system','Haar','Biorthogonal');
-set(gca,'FontSize',15,'xlim',[-50 30],'XTick',-50:10:30);
+set(gca,'FontSize',15,'xlim',[-50 30],'XTick',-50:10:30,'YTick',[1e-7 1e-6 1e-5 1e-4 1e-3 1e-2 1e-1 1]);

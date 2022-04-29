@@ -4,8 +4,10 @@ clc;
 close all;
 clear;
 
-t = 0:.0001:.0511;
-x = sin(2*pi*30*t);
+t = 0:.0001:0.0255;
+x = [sin(2*pi*420*t) square(2*pi*120*t)];
+
+% t = 0:.0001:.0511;
 % xn = x' + 0.08*randn(length(x),1);
 
 load dspwlets;   
