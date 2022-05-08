@@ -1,0 +1,44 @@
+%----------------------------------------------------------
+% Number of pages for Synopsis: 30 to 50
+%----------------------------------------------------------
+% List of command to convert report.tex to report.pdf
+%----------------------------------------------------------
+%pdflatex report.tex
+%evince report.pdf &
+\documentstyle[12pt,a4,graphicx]{report}
+\RequirePackage{tabularx}
+% \RequirePackage{amsmath}
+\topmargin 18mm
+\textwidth 6.5in
+\headheight -8pt
+\headsep -12pt
+\textheight 9.5in
+\footheight 18mm 
+\footskip 18mm
+\bibliographystyle{plain}
+\begin{document}
+\pagebreak
+\pagebreak
+
+\pagenumbering{roman}
+\input{be_title.tex}
+\input{be_certificate1.tex}
+\input{be_certificate2.tex}
+\input{abstract.tex}
+%\input{vision.tex}
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+\pagenumbering{arabic}
+
+\input{introduction.tex}
+\input{literature_review.tex}
+%\input{hardware.tex}
+\input{software.tex}
+\input{results.tex}
+%\input{road_map.tex}
+\input{conclusion.tex}
+%\input{ieee_conference}
+\input{bibliography.tex}
+\end{document}

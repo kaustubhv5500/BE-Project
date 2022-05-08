@@ -1,0 +1,95 @@
+\chapter{Literature Review}
+The use of Filter Banks as an alternative to conventional signal processing systems is a well-explored topic. The improved data rates, as well as error rates achieved by such systems, have been proven theoretically and practically. A sizeable number of studies explore the underlying theory and mathematics behind Trans-multiplexers as an application of filter banks. These studies explore the concept of Perfect Reconstruction (PR) and achieving a pure delay as the determinant of the cofactor matrix of the filter coefficients. These studies use conventional transformation functions such as Fourier and Cosine, which result in some amount of amplitude distortion and cross-talk, which is undesirable in satellite systems. Thus, subsequent studies have proposed the use of Wavelet Transform (WT) as an alternative to improve system performance. Various studies have proposed algorithms for Wavelet-based filter bank design, but these do not consider the case of Trans-multiplexers. Moreover, these studies merely describe the algorithm without proper implementation, simulation and testing. \par
+Some of the recent work conducted in the field of Wavelets, Wavelet Transform-based filter design and Trans-multiplexers are discussed below:
+
+\begin{enumerate}
+\item[\textbf{a)}] \textbf{``ISRO Research Proposals'', 2021, ISRO Research Building Programme in \textit{ISRO Respond Basket}, isro.gov.in., SAC-009 pg 44-45. \cite{b1}}
+\begin{itemize}
+    \item This paper introduces the research proposal and delineates the project deliverables.
+    \item The deliverables and specifications include the Wavelet Transform based filter design algorithm and implementation of the designed system using MATLAB and generation of RTL code.
+\end{itemize}
+\item[\textbf{b)}] \textbf{Penedo, S.R.M., Netto, M.L. \& Justo, J.F., ``Designing digital filter banks using wavelets''. \textit{EURASIP J. Adv. Signal Process.} 2019 \cite{b2}}
+\begin{itemize}
+    \item This paper explores the WT technique to realize FIR filter banks.
+    \item The underlying mathematics behind Wavelet Transform-based design is  analysed by the authors. The designed sub-band system is implemented and tested in MATLAB using Daubechies mother wavelets.
+    \item However, this paper does not highlight a generalised algorithm that can be extended to Trans-multiplexers.
+\end{itemize}
+\item[\textbf{c)}] \textbf{Peter Yusuf Dibal, Elizabeth Onwuka, James Agajo, \& Caroline Alenoghena (2019). Analysis of Wavelet Transform Design via Filter Bank Technique. In \textit{Wavelet Transform and Complexity.} IntechOpen. \cite{b3}}
+\begin{itemize}
+    \item This paper surveys recent findings in the domain of WT-based filter design for sub-band coder systems.
+    \item It explains the underlying theory and lays out a basic algorithm for filter design using Discrete Fourier Transform (DFT).
+    \item However, this paper does not consider the case of Trans-multiplexers.
+\end{itemize}
+\item[\textbf{d)}] \textbf{C. Sidney Burrus, \textit{``Wavelets and Wavelet Transforms''.} OpenStax CNX. 2018 \cite{b4}}
+\begin{itemize}
+    \item This paper explains important concepts about the Wavelet Transform and its applications.
+    \item Wavelets such as Haar, Sinc and Daubechies are introduced, along with related algorithms such as the Discrete Wavelet Transform (DWT).
+\end{itemize}
+\item[\textbf{e)}] \textbf{S. G. Mallat, ``A theory for multiresolution signal decomposition: the wavelet representation,'' in \textit{IEEE Transactions on Pattern Analysis and Machine Intelligence} \cite{mallat_paper}}
+\begin{itemize}
+    \item This paper highlights the multi-resolution analysis (MRA) construction for compactly supported wavelets. The MRA wavelet construction demonstrates the equivalence of wavelet bases and conjugate mirror filters used in discrete, multirate filter banks in signal processing.
+    \item  The paper explores the underlying theory and mathematics behind multi-resolution analysis and signal  approximation using orthogonal wavelets.
+\end{itemize}
+\item[\textbf{f)}] \textbf{M. Vetterli and C. Herley, ``Wavelets and filter banks: theory and design,'' in \textit{IEEE Transactions on Signal Processing} \cite{b5}}
+\begin{itemize}
+    \item This seminal paper on WT-based filter banks examines all the mathematics and theory for sub-band coder design using Wavelets.
+    \item However, this paper does not propose a general design algorithm applicable to Trans-multiplexers. 
+\end{itemize}
+\item[\textbf{g)}] \textbf{Cruz-Roldán, F., Bravo-Santos, Á., Martı́n-Martı́n, P. and Jiménez-Martı́nez, R., ``Design of multi-channel near-perfect-reconstruction transmultiplexers using cosine-modulated filter banks'', \textit{Elsevier Signal Processing} \cite{b6}}
+\begin{itemize}
+    \item This paper explores the Discrete Cosine Transform (DCT) to realize QMF filter banks with various lengths and channel numbers.
+    \item The work implements a sub-band coder system with filters designed using DCT using MATLAB. However, the simulation results indicate amplitude distortion and cross-talk.
+\end{itemize}
+
+\item[\textbf{h)}] \textbf{Ramachandran, R., \& Kabal, P. (1990). ``Transmultiplexers: Perfect reconstruction and compensation of channel distortion''. \textit{Signal Processing} \cite{b7}}
+\begin{itemize}
+    \item This seminal paper on PR Trans-multiplexers as dual systems of sub-band coders explores the relevant theory and matrix mathematics for Trans-multiplexer filter design.
+    \item This paper proposes the use of DFT for lossless filter design, which have several shortcomings.
+\end{itemize}
+\item[\textbf{i)}] \textbf{Martin Vetterli (1986). ``Filter banks allowing perfect reconstruction''. \textit{Elsevier Journal on Signal Processing} \cite{b8}}
+\begin{itemize}
+    \item This seminal paper investigates PR Filter banks for N-channel sub-band coders as well as Trans-multiplexers.
+    \item It discusses matrix solutions for sub-band and dual system designs which result in pure delay co-factor matrix determinants and perfect reconstruction.
+\end{itemize}
+\end{enumerate}
+
+Table \ref{wlets} highlights the different wavelet families identified during the literature review.
+
+\begin{table}[hptb]
+\begin{center}
+\begin{tabular}{ |p{2.5cm}|p{10cm}|p{3cm}| } 
+ \hline
+Wavelet & Features & Name \\ 
+ \hline
+Daubechies & Nonlinear phase; energy concentrated  near the start of their support & `dbN' for N = 1, 2, ... , 45 \\ 
+ \hline
+ Haar & Symmetric; special case of Daubechies; useful for edge detection & `haar' (`db1') \\ 
+ \hline
+ Symlet & Least asymmetric; nearly linear phase  &  `symN' for N = 2, 3, ..., 45 \\
+ \hline
+ Fejér-Korovkin & 	Filters constructed to minimize the difference between a valid scaling filter and the ideal sinc lowpass filter; are especially useful in discrete (decimated and undecimated) wavelet packet transforms. & `fkN' for N = 4, 6, ..., 22 \\ 
+ \hline
+ Coiflet & Scaling function and wavelets have same number of vanishing moments & `coifN' for N = 1, 2, 5 \\
+ \hline
+ Biorthogonal Spline & Compact support; symmetric filters; linear phase & `biorNr.Nd'  \\
+ \hline
+\end{tabular}
+\caption{Different types of Wavelets \cite{mallat_book}.}
+\label{wlets}
+\end{center}
+\end{table}
+
+
+\chapter{Project Objectives}
+\section{Problem Statement}
+To develop an algorithm/filter to realize a Multi-channel Perfect Reconstruction Trans-multiplexer using Wavelet Transform techniques for base-band Satellite Communication.
+\section{Objectives}
+\begin{itemize}
+\item To develop an algorithm/filter for designing a Perfect Reconstruction Trans-multiplexer using Wavelet Transform to improve error rates and achieve high bit rates for Satellite Communications.
+\item Realize the filters and allow the user to configure the number of channels and input signals.
+% \item Realize the filter using MATLAB and its DSP Toolbox.
+% \item Allow user to configure the number of channels and input signals.
+\item Test the system performance using various Mother Wavelets and Channel Models.
+\item Optimize the algorithm and reduce Error Rates and Cross-talk.
+\item Generate RTL Code of the system for FPGA implementation.
+\end{itemize}

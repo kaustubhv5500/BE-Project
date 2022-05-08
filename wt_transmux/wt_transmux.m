@@ -114,7 +114,7 @@ delay3 = dsp.Delay(6);
 t = 0.1:0.1:25.6;
 x = sin(1.3*t + pi);
 % [x,fs] = audioread("OSR_us_000_0037_8k.wav");
-x = reshape(x(1:256),1,256);
+x = reshape(x(1:256),2,256);
 
 y = square(t);
 
@@ -131,7 +131,7 @@ for i=1:Num
     Tx = reshape(Tx,length(Tx),1);
     Tx_dwt = dyadicSynthesis(Tx);
 %     Tx_dwt_noise = rayChan(Tx_dwt);
-%     Tx_dwt_noise = awgn(Tx_dwt,30);
+    Tx_dwt_noise = awgn(Tx_dwt,30);
     Rx = dyadicAnalysis(Tx_dwt);
     scope1(Tx(1:256),Tx(256:512),Tx(512:768));
     scope2(Rx(1:256),Rx(256:512),Rx(512:768));
